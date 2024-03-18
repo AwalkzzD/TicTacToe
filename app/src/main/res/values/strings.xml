@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_msg">Welcome to TIC TAC TOE!</string>
     <string name="player_one_hint">Enter Player One Name (Red)</string>
+    <string name="player_two_hint">Enter Player Two Name (Yellow)</string>
     <string name="play_button_text">Start Game</string>
     <string name="quit_game_text">Quit Game</string>
     <string name="play_again_text">Play Again</string>

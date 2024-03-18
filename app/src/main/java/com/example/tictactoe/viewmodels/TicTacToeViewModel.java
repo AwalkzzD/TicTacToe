@@ -1,5 +1,8 @@
 package com.example.tictactoe.viewmodels;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableArrayMap;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
@@ -48,5 +51,10 @@ public class TicTacToeViewModel extends ViewModel {
 
     public LiveData<Player> getWinner() {
         return game.winner;
+    }
+
+    @BindingAdapter("source")
+    public static void setImageSource(ImageView view, int image) {
+        view.setImageResource(image);
     }
 }

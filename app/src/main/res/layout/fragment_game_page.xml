@@ -96,7 +96,8 @@
                                 android:id="@+id/a1"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`00`)}"
-                                android:src="@{viewModel.cells[`00`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`00`].value}" />
 
                             <View style="@style/vertical_line" />
 
@@ -104,7 +105,8 @@
                                 android:id="@+id/a2"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`01`)}"
-                                android:src="@{viewModel.cells[`01`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`01`].value}" />
 
                             <View style="@style/vertical_line" />
 
@@ -112,7 +114,8 @@
                                 android:id="@+id/a3"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`02`)}"
-                                android:src="@{viewModel.cells[`02`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`02`].value}" />
 
                         </LinearLayout>
 
@@ -124,7 +127,8 @@
                                 android:id="@+id/b1"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`10`)}"
-                                android:src="@{viewModel.cells[`10`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`10`].value}" />
 
                             <View style="@style/vertical_line" />
 
@@ -132,7 +136,8 @@
                                 android:id="@+id/b2"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`11`)}"
-                                android:src="@{viewModel.cells[`11`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`11`].value}" />
 
                             <View style="@style/vertical_line" />
 
@@ -140,7 +145,8 @@
                                 android:id="@+id/b3"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`12`)}"
-                                android:src="@{viewModel.cells[`12`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`12`].value}" />
 
                         </LinearLayout>
 
@@ -153,7 +159,7 @@
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`20`)}"
                                 android:scaleType="centerInside"
-                                android:src="@{viewModel.cells[`20`].value}" />
+                                app:source="@{viewModel.cells[`20`].value}" />
 
                             <View style="@style/vertical_line" />
 
@@ -162,7 +168,7 @@
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`21`)}"
                                 android:scaleType="centerInside"
-                                android:src="@{viewModel.cells[`21`].value}" />
+                                app:source="@{viewModel.cells[`21`].value}" />
 
                             <View style="@style/vertical_line" />
 
@@ -170,7 +176,8 @@
                                 android:id="@+id/c3"
                                 style="@style/cell"
                                 android:onClick="@{() -> viewModel.onCellClick(`22`)}"
-                                android:src="@{viewModel.cells[`22`].value}" />
+                                android:scaleType="centerInside"
+                                app:source="@{viewModel.cells[`22`].value}" />
 
                         </LinearLayout>
 

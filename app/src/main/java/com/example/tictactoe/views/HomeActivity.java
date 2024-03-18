@@ -11,7 +11,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +18,5 @@ public class HomeActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.fragment_container, new WelcomePage()).commit();
-
     }
 }

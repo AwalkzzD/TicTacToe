@@ -72,4 +72,8 @@ public class GamePage extends Fragment {
             ticTacToeViewModel.gameRunning = false;
         }
     }
+
+    public void buttonClick(View view) {
+        /*ticTacToeViewModel.onCellClick(key);*/
+    }
 }

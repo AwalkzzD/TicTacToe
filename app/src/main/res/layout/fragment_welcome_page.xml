@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/player1_et"
         android:layout_margin="10dp"
-        android:hint="@string/player_one_hint"
+        android:hint="@string/player_two_hint"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
