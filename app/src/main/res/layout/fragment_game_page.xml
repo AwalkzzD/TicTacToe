@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.tictactoe.viewmodels.TicTacToeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.GamePage">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:context=".views.home.game.GameFragment">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/custom_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top"
+                android:background="?attr/colorPrimary"
+                app:titleTextColor="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/game_updates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:text="@{viewModel.currentPlayer.toString()}"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/button_options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/game_updates"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/play_again_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:text="@string/play_again_text"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/quit_game_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:text="@string/quit_game_text"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/button_options">
+
+                    <LinearLayout
+                        android:id="@+id/game_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical"
+                        android:padding="50dp"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout style="@style/row">
+
+                            <ImageButton
+                                android:id="@+id/a1"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`00`)}"
+                                android:src="@{viewModel.cells[`00`].value}" />
+
+                            <View style="@style/vertical_line" />
+
+                            <ImageButton
+                                android:id="@+id/a2"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`01`)}"
+                                android:src="@{viewModel.cells[`01`].value}" />
+
+                            <View style="@style/vertical_line" />
+
+                            <ImageButton
+                                android:id="@+id/a3"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`02`)}"
+                                android:src="@{viewModel.cells[`02`].value}" />
+
+                        </LinearLayout>
+
+                        <View style="@style/horizontal_line" />
+
+                        <LinearLayout style="@style/row">
+
+                            <ImageButton
+                                android:id="@+id/b1"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`10`)}"
+                                android:src="@{viewModel.cells[`10`].value}" />
+
+                            <View style="@style/vertical_line" />
+
+                            <ImageButton
+                                android:id="@+id/b2"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`11`)}"
+                                android:src="@{viewModel.cells[`11`].value}" />
+
+                            <View style="@style/vertical_line" />
+
+                            <ImageButton
+                                android:id="@+id/b3"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`12`)}"
+                                android:src="@{viewModel.cells[`12`].value}" />
+
+                        </LinearLayout>
+
+                        <View style="@style/horizontal_line" />
+
+                        <LinearLayout style="@style/row">
+
+                            <ImageButton
+                                android:id="@+id/c1"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`20`)}"
+                                android:scaleType="centerInside"
+                                android:src="@{viewModel.cells[`20`].value}" />
+
+                            <View style="@style/vertical_line" />
+
+                            <ImageButton
+                                android:id="@+id/c2"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`21`)}"
+                                android:scaleType="centerInside"
+                                android:src="@{viewModel.cells[`21`].value}" />
+
+                            <View style="@style/vertical_line" />
+
+                            <ImageButton
+                                android:id="@+id/c3"
+                                style="@style/cell"
+                                android:onClick="@{() -> viewModel.onCellClick(`22`)}"
+                                android:src="@{viewModel.cells[`22`].value}" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
