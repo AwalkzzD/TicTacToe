@@ -4,12 +4,12 @@ import androidx.annotation.Nullable;
 
 public class Player {
 
-    public String name;
-    public int value;
+    public String playerName;
+    public int playerSymbol;
 
-    public Player(String name, int value) {
-        this.name = name;
-        this.value = value;
+    public Player(String playerName, int playerSymbol) {
+        this.playerName = playerName;
+        this.playerSymbol = playerSymbol;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class Player {
 
         Player player = (Player) obj;
 
-        return name.compareTo(player.name) == 0 && value == player.value;
+        return playerName.compareTo(player.playerName) == 0 && playerSymbol == player.playerSymbol;
 
     }
 }

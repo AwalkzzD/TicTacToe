@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Tic Tac Toe</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_msg">Welcome to TIC TAC TOE!</string>
     <string name="player_one_hint">Enter Player One Name (Red)</string>
     <string name="player_two_hint">Enter Player Two Name (Yellow)</string>

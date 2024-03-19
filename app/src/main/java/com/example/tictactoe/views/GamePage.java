@@ -5,9 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,14 +30,19 @@ public class GamePage extends Fragment {
     private FragmentManager fragmentManager;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         FragmentGamePageBinding gamePageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_game_page, container, false);
         ticTacToeViewModel = new ViewModelProvider(requireActivity()).get(TicTacToeViewModel.class);
 
-        initViewModel();
+        setGame();
 
         gamePageBinding.setViewModel(ticTacToeViewModel);
+
+        Toolbar toolbar = gamePageBinding.toolbar;
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+        if (activity != null) activity.setSupportActionBar(toolbar);
 
         return gamePageBinding.getRoot();
     }
@@ -50,30 +59,31 @@ public class GamePage extends Fragment {
         quitGame.setOnClickListener(v -> fragmentManager.beginTransaction().replace(R.id.fragment_container, new WelcomePage()).commit());
 
         playAgain.setOnClickListener(v -> {
-            ticTacToeViewModel.clearCells();
-            initViewModel();
+            ticTacToeViewModel.clearBoard();
+            setGame();
         });
-    }
-
-    private void initViewModel() {
-        ticTacToeViewModel.setGameBoard();
-        ticTacToeViewModel.getWinner().observe(getViewLifecycleOwner(), this::checkWinner);
     }
 
     private void checkWinner(Player winner) {
         if (winner.equals(GameBoard.NO_ONE)) {
             ticTacToeViewModel.currentPlayer.set("It's a Draw!");
-            ticTacToeViewModel.gameRunning = false;
+            ticTacToeViewModel.isGameOver = true;
         } else if (winner.equals(ticTacToeViewModel.player1)) {
-            ticTacToeViewModel.currentPlayer.set(winner.name + " has Won!" + "\nCongratulations!!!");
-            ticTacToeViewModel.gameRunning = false;
+            ticTacToeViewModel.currentPlayer.set("Congratulations!!! " + winner.playerName + " has Won!");
+            ticTacToeViewModel.isGameOver = true;
         } else if (winner.equals(ticTacToeViewModel.player2)) {
-            ticTacToeViewModel.currentPlayer.set(winner.name + " has Won!" + "\nCongratulations!!!");
-            ticTacToeViewModel.gameRunning = false;
+            ticTacToeViewModel.currentPlayer.set("Congratulations!!! " + winner.playerName + " has Won!");
+            ticTacToeViewModel.isGameOver = true;
         }
     }
 
-    public void buttonClick(View view) {
-        /*ticTacToeViewModel.onCellClick(key);*/
+    private void setGame() {
+        ticTacToeViewModel.setGameBoard();
+        ticTacToeViewModel.getWinner().observe(getViewLifecycleOwner(), this::checkWinner);
+    }
+
+    @BindingAdapter("source")
+    public static void setImageSource(ImageView view, int image) {
+        view.setImageResource(image);
     }
 }

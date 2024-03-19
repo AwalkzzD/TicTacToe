@@ -3,6 +3,7 @@ package com.example.tictactoe.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,9 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, 3000);
+
+        ImageView splashImage = findViewById(R.id.splash);
+        splashImage.animate().scaleX(1F).scaleXBy(1.5F).scaleY(1F).scaleYBy(1.5F).setDuration(2000).setStartDelay(1000).start();
 
     }
 }

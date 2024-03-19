@@ -1,8 +1,5 @@
 package com.example.tictactoe.viewmodels;
 
-import android.widget.ImageView;
-
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableArrayMap;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
@@ -14,47 +11,43 @@ import com.example.tictactoe.models.Player;
 
 public class TicTacToeViewModel extends ViewModel {
 
+    private GameBoard gameBoard;
+
     public ObservableField<String> currentPlayer = new ObservableField<>();
     public ObservableArrayMap<String, Player> cells;
 
-    public GameBoard game;
     public Player player1, player2;
-    public Boolean gameRunning;
+    public Boolean isGameOver;
 
-    public void setPlayers(String playerOneName, String playerTwoName) {
-        player1 = new Player(playerOneName, R.drawable.red_token);
-        player2 = new Player(playerTwoName, R.drawable.yellow_token);
+    public void setPlayers(String player1Name, String player2Name) {
+        player1 = new Player(player1Name, R.drawable.red_token);
+        player2 = new Player(player2Name, R.drawable.yellow_token);
     }
 
     public void setGameBoard() {
-        game = new GameBoard(player1, player2);
+        gameBoard = new GameBoard(player1, player2);
         cells = new ObservableArrayMap<>();
-        gameRunning = true;
-        currentPlayer.set(game.currentPlayer.name + "'s Turn");
+        isGameOver = false;
+        currentPlayer.set(gameBoard.currentPlayer.playerName + "'s Turn");
     }
 
-    public void onCellClick(String key) {
-        if (gameRunning) {
+    public void playMove(String key) {
+        if (!isGameOver) {
             int row = Integer.parseInt(String.valueOf(key.charAt(0)));
             int column = Integer.parseInt(String.valueOf(key.charAt(1)));
-            if (game.cells[row][column] == null) {
-                cells.put(key, game.currentPlayer);
-                game.addPlayerCell(row, column);
-                currentPlayer.set(game.currentPlayer.name + "'s Turn");
+            if (gameBoard.cells[row][column] == null) {
+                cells.put(key, gameBoard.currentPlayer);
+                gameBoard.addPlayerMove(row, column);
+                currentPlayer.set(gameBoard.currentPlayer.playerName + "'s Turn");
             }
         }
     }
 
-    public void clearCells() {
+    public void clearBoard() {
         cells.clear();
     }
 
     public LiveData<Player> getWinner() {
-        return game.winner;
-    }
-
-    @BindingAdapter("source")
-    public static void setImageSource(ImageView view, int image) {
-        view.setImageResource(image);
+        return gameBoard.winner;
     }
 }

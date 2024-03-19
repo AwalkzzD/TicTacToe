@@ -6,77 +6,77 @@ import com.example.tictactoe.R;
 
 public class GameBoard {
 
-    public static final int WIDTH_SIZE = 3;
-    public static final int HEIGHT_SIZE = 3;
     public static final Player NO_ONE = new Player("No One", R.drawable.black_token);
 
     public Cell[][] cells;
     public Player currentPlayer;
+    public MutableLiveData<Player> winner;
+
     Player player1;
     Player player2;
-    public MutableLiveData<Player> winner;
-    int remainder;
+
+    int movesLeft;
 
     public GameBoard(Player player1, Player player2) {
-        init(player1, player2);
+        resetGame(player1, player2);
     }
 
-    private void init(Player player1, Player player2) {
-        cells = new Cell[WIDTH_SIZE][HEIGHT_SIZE];
+    private void resetGame(Player player1, Player player2) {
+        cells = new Cell[3][3];
         this.player1 = player1;
         this.player2 = player2;
         currentPlayer = this.player1;
-        remainder = WIDTH_SIZE * HEIGHT_SIZE;
+        movesLeft = 9;
         winner = new MutableLiveData<>();
     }
 
-    public boolean winnerCheck(Cell... cells) {
+    public boolean checkWinner(Cell... cells) {
         if (cells[0] == null || cells[1] == null || cells[2] == null) return false;
-        return cells[0].player.value == cells[1].player.value && cells[1].player.value == cells[2].player.value;
+        return cells[0].player.playerSymbol == cells[1].player.playerSymbol && cells[1].player.playerSymbol == cells[2].player.playerSymbol;
     }
 
-    public boolean verticalWinner() {
-        Cell[] checkCell = new Cell[WIDTH_SIZE];
-        for (int j = 0; j < HEIGHT_SIZE; j++) {
+    public boolean checkVerticalCells() {
+        Cell[] checkCell = new Cell[3];
+        for (int j = 0; j < 3; j++) {
             checkCell[0] = cells[0][j];
             checkCell[1] = cells[1][j];
             checkCell[2] = cells[2][j];
-            if (winnerCheck(checkCell)) return true;
+            if (checkWinner(checkCell)) return true;
         }
         return false;
     }
 
-    public boolean horizontalWinner() {
+    public boolean checkHorizontalCells() {
         for (Cell[] c : cells)
-            if (winnerCheck(c)) return true;
+            if (checkWinner(c)) return true;
         return false;
     }
 
-    public boolean diagonalWinner() {
-        Cell[] checkCell = new Cell[WIDTH_SIZE];
+    public boolean checkDiagonalCells() {
+        Cell[] checkCell = new Cell[3];
         checkCell[0] = cells[0][0];
         checkCell[1] = cells[1][1];
         checkCell[2] = cells[2][2];
-        if (winnerCheck(checkCell)) return true;
+        if (checkWinner(checkCell)) return true;
         checkCell[0] = cells[0][2];
         checkCell[1] = cells[1][1];
         checkCell[2] = cells[2][0];
-        return winnerCheck(checkCell);
+        return checkWinner(checkCell);
     }
 
-    public void addPlayerCell(int row, int column) {
+    public void addPlayerMove(int row, int column) {
         cells[row][column] = new Cell(currentPlayer);
-        remainder -= 1;
-        if (verticalWinner()) {
+        movesLeft -= 1;
+        if (checkVerticalCells()) {
             winner.postValue(currentPlayer);
             return;
-        } else if (horizontalWinner()) {
+        } else if (checkHorizontalCells()) {
             winner.postValue(currentPlayer);
             return;
-        } else if (diagonalWinner()) {
+        } else if (checkDiagonalCells()) {
             winner.postValue(currentPlayer);
             return;
-        } else if (remainder == 0) {
+        } else if (movesLeft == 0) {
             winner.postValue(NO_ONE);
             return;
         }

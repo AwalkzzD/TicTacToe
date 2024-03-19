@@ -23,7 +23,7 @@
             tools:context=".views.home.game.GameFragment">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/custom_toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
@@ -41,149 +41,94 @@
                     android:layout_marginTop="80dp"
                     android:text="@{viewModel.currentPlayer.toString()}"
                     android:textAlignment="center"
+                    android:textColor="@color/material_dynamic_primary50"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/button_options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/game_updates"
                     android:layout_marginTop="30dp"
-                    android:orientation="horizontal">
+                    android:gravity="center">
 
                     <Button
                         android:id="@+id/play_again_button"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_weight="1"
                         android:text="@string/play_again_text"
                         android:textSize="15sp" />
 
                     <Button
                         android:id="@+id/quit_game_button"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_weight="1"
+                        android:layout_toEndOf="@id/play_again_button"
                         android:text="@string/quit_game_text"
                         android:textSize="15sp" />
-                </LinearLayout>
+                </RelativeLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/button_options">
+                    android:layout_below="@id/button_options"
+                    android:layout_margin="40dp"
+                    android:columnCount="3"
+                    android:columnOrderPreserved="true"
+                    android:rowCount="3"
+                    android:rowOrderPreserved="true">
 
-                    <LinearLayout
-                        android:id="@+id/game_buttons"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_alignParentBottom="true"
-                        android:orientation="vertical"
-                        android:padding="50dp"
-                        app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`00`)}"
+                        app:source="@{viewModel.cells[`00`].playerSymbol}" />
 
-                        <LinearLayout style="@style/row">
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`01`)}"
+                        app:source="@{viewModel.cells[`01`].playerSymbol}" />
 
-                            <ImageButton
-                                android:id="@+id/a1"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`00`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`00`].value}" />
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`02`)}"
+                        app:source="@{viewModel.cells[`02`].playerSymbol}" />
 
-                            <View style="@style/vertical_line" />
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`10`)}"
+                        app:source="@{viewModel.cells[`10`].playerSymbol}" />
 
-                            <ImageButton
-                                android:id="@+id/a2"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`01`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`01`].value}" />
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`11`)}"
+                        app:source="@{viewModel.cells[`11`].playerSymbol}" />
 
-                            <View style="@style/vertical_line" />
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`12`)}"
+                        app:source="@{viewModel.cells[`12`].playerSymbol}" />
 
-                            <ImageButton
-                                android:id="@+id/a3"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`02`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`02`].value}" />
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`20`)}"
+                        app:source="@{viewModel.cells[`20`].playerSymbol}" />
 
-                        </LinearLayout>
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`21`)}"
+                        app:source="@{viewModel.cells[`21`].playerSymbol}" />
 
-                        <View style="@style/horizontal_line" />
+                    <ImageButton
+                        style="@style/custom_image_button_style"
+                        android:onClick="@{() -> viewModel.playMove(`22`)}"
+                        app:source="@{viewModel.cells[`22`].playerSymbol}" />
 
-                        <LinearLayout style="@style/row">
-
-                            <ImageButton
-                                android:id="@+id/b1"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`10`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`10`].value}" />
-
-                            <View style="@style/vertical_line" />
-
-                            <ImageButton
-                                android:id="@+id/b2"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`11`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`11`].value}" />
-
-                            <View style="@style/vertical_line" />
-
-                            <ImageButton
-                                android:id="@+id/b3"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`12`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`12`].value}" />
-
-                        </LinearLayout>
-
-                        <View style="@style/horizontal_line" />
-
-                        <LinearLayout style="@style/row">
-
-                            <ImageButton
-                                android:id="@+id/c1"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`20`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`20`].value}" />
-
-                            <View style="@style/vertical_line" />
-
-                            <ImageButton
-                                android:id="@+id/c2"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`21`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`21`].value}" />
-
-                            <View style="@style/vertical_line" />
-
-                            <ImageButton
-                                android:id="@+id/c3"
-                                style="@style/cell"
-                                android:onClick="@{() -> viewModel.onCellClick(`22`)}"
-                                android:scaleType="centerInside"
-                                app:source="@{viewModel.cells[`22`].value}" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </GridLayout>
 
             </RelativeLayout>
 
